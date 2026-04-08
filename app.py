@@ -93,29 +93,28 @@ h3 { font-size: 2rem !important; color: #5D4037;}
 </div>
 """, unsafe_allow_html=True)
 
-# --- 3. THE TIME LOCK LOGIC ---
+# --- 3. THE TIME LOCK LOGIC WITH DEVELOPER BACKDOOR ---
 
-# Set the exact unlock date: Year, Month, Day, Hour, Minute, Second
 # May 10th, 2026 at 00:00:00 (Midnight)
 UNLOCK_DATE = datetime(2026, 5, 10, 0, 0, 0)
 current_time = datetime.now()
 
-# If we haven't reached May 10th yet, show the countdown and STOP the app.
-if current_time < UNLOCK_DATE:
+# THE BACKDOOR: This checks the website URL for a secret "?dev=admin" tag
+is_developer = st.query_params.get("dev") == "admin"
+
+# If it's before May 10th AND you are not using the secret developer link, show the lock!
+if current_time < UNLOCK_DATE and not is_developer:
     time_difference = UNLOCK_DATE - current_time
-    # Convert the time difference entirely into hours
     hours_left = int(time_difference.total_seconds() / 3600)
     
     st.markdown("<h1>⏳ Top Secret Files ⏳</h1>", unsafe_allow_html=True)
     st.markdown("<h2>Access is currently locked.</h2>", unsafe_allow_html=True)
     
-    # Displays the giant hours counter
-    st.metric(label="Time Remaining Until May 10th:", value=f"{hours_left} Hours")
-    st.write("No peaking early! Check back when the clock strikes midnight. 💖")
+    st.metric(label="Time Remaining :", value=f"{hours_left} Hours")
+    st.write("No peeking early! Check back when the clock strikes midnight. 💖")
     
-    # This command stops Streamlit from reading the rest of the code!
+    # Stops Streamlit from loading the rest of the site for her
     st.stop()
-
 
 # --- 4. THE APP CONTENT (Only loads after May 10th) ---
 
