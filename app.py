@@ -2,49 +2,60 @@ import streamlit as st
 import time
 
 # --- 1. PAGE SETUP & BIGGER FONT CONFIGURATION ---
-# We use custom CSS to override standard Streamlit font sizes.
 st.set_page_config(page_title="6 Month Anniversary! ❤️", page_icon="💖", layout="centered")
 
-# --- 2. THE FLOATING HEART BACKGROUND & SCALING CSS ---
-# This is where the magic happens.
-# - The @keyframes definitions create the 'float' animation.
-# - The CSS scales existing elements (headings, text, buttons, expanders) to look huge.
-# - Global font changed to a friendly Cursive/Sans-Serif mix for a less formal look.
+# --- 2. THE DYNAMIC BACKGROUND & SCALING CSS ---
 st.markdown("""
 <style>
-/* Global scaling - Make everything bigger */
+/* 1. Dynamic background gradient (Restored!) */
+[data-testid="stAppViewContainer"] {
+    background: linear-gradient(-45deg, #ff9a9e, #fecfef, #ff9a9e, #fecfef);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 2. Global scaling - Make everything bigger and informal */
 [data-testid="stMarkdownContainer"] p { font-size: 1.8rem !important; font-family: 'Comic Sans MS', cursive, sans-serif; color: #5D4037;}
 h1 { font-size: 5rem !important; font-family: 'Comic Sans MS', cursive, sans-serif; color: #8E242C; text-align: center;}
 h2 { font-size: 3rem !important; color: #8E242C;}
 h3 { font-size: 2rem !important; color: #5D4037;}
 
-/* Button scaling and styling */
+/* 3. Button scaling and styling */
 .stButton>button {
     font-size: 2.2rem !important;
     padding: 15px 40px !important;
     border-radius: 50px !important;
     background-color: #E57373 !important;
     color: white !important;
-    border: none !important;
+    border: 2px solid white !important;
     font-family: 'Comic Sans MS', cursive, sans-serif;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
 }
 .stButton>button:hover {
     background-color: #EF5350 !important;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0px 6px 15px rgba(0,0,0,0.2) !important;
 }
 
-/* Expander (Collapse box) scaling */
+/* 4. Expander (Collapse box) scaling */
 .streamlit-expanderHeader {
     font-size: 2rem !important;
 }
 
-/* Metric scaling */
+/* 5. Metric scaling */
 [data-testid="stMetricValue"] {
     font-size: 4rem !important;
     color: #8E242C;
 }
 
-/* Define the Floating Hearts Background Animation */
+/* 6. Define the Floating Hearts Background Animation */
 @keyframes float {
   0% { transform: translateY(100vh) translateX(0px); opacity: 0; }
   10% { opacity: 1; }
@@ -55,7 +66,7 @@ h3 { font-size: 2rem !important; color: #5D4037;}
 /* Base style for a single floating heart */
 .heart {
   position: fixed;
-  color: rgba(229, 115, 115, 0.5); /* Semi-transparent red/pink */
+  color: rgba(229, 115, 115, 0.5); /* Semi-transparent */
   z-index: -1; /* Put behind existing Streamlit content */
   font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol";
 }
@@ -97,52 +108,52 @@ h3 { font-size: 2rem !important; color: #5D4037;}
 # Initial celebratory welcome
 st.markdown("# 🥳 WELCOME! 🥳")
 st.write("Ready to check out our Top Secret Boyfriend Files?")
-start_btn = st.button("Access Granted! Click Here", key="start_btn")
 
-if start_btn:
-    # --- TRANSITION 1: Initial Click ---
-    # We clear the screen manually using a placeholder
-    main_placeholder = st.empty()
-    
-    with main_placeholder.container():
-        # Spinners simulate a transition loading state
-        with st.spinner('Accessing secure memory core...'):
-            time.sleep(1.5)
-        
-        # Celebrate success!
-        st.balloons()
-        st.markdown("<h1>Our 6 Month Milestone!</h1>", unsafe_allow_html=True)
-        st.markdown("---")
-        
-        col1, col2 = st.columns(2)
-        with col1:
-            st.metric(label="Days We've Kept Each Other Happy", value="183 Days", delta="Since Month 1!")
-        with col2:
-            st.write("Wow, look how many days we have shared together!")
+# --- NEW PASSWORD GATE (101125) ---
+password = st.text_input("Enter the secret code (Hint: Our Date)", type="password")
 
-        st.markdown("---")
-        st.markdown("<h2>A Secret Memory 🤫</h2>", unsafe_allow_html=True)
-        
-        # The 'expander' looks formal, but we scaled its text to be big.
-        with st.expander("Click to reveal Month 3 best memory..."):
-            st.write("Do you remember when we got completely lost looking for that taco place?")
-            st.image("https://upload.wikimedia.org/wikipedia/commons/e/e4/A_couple_at_sunset.jpg", 
-                     caption="A generic couple sunset image because I don't know you guys!", 
-                     use_column_width=True)
-            
-        st.markdown("---")
-        # Final celebratory button to provide another transition
-        st.write("Ready for the grand finale?")
-        final_btn = st.button("Click for Your Surprise!", key="final_btn")
+if password == "101125":
+    start_btn = st.button("Access Granted! Click Here", key="start_btn")
 
-        if final_btn:
-            # --- TRANSITION 2: Final Click ---
-            # Using st.toast for a less formal transition notice
-            st.toast('Loading the finale animation! Prepare for joy!')
+    if start_btn:
+        # --- TRANSITION 1: Initial Click ---
+        main_placeholder = st.empty()
+        
+        with main_placeholder.container():
+            with st.spinner('Accessing secure memory core...'):
+                time.sleep(1.5)
             
-            with st.spinner('Igniting celebratory engines...'):
-                time.sleep(2)
-            
-            st.snow() # The snow animation looks cool and is clearly informal.
-            st.success("WE DID IT! Can't wait for another 6 months of adventures!")
             st.balloons()
+            st.markdown("<h1>Our 6 Month Milestone!</h1>", unsafe_allow_html=True)
+            st.markdown("---")
+            
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric(label="Days We've Kept Each Other Happy", value="183 Days", delta="Since Month 1!")
+            with col2:
+                st.write("Wow, look how many days we have shared together!")
+
+            st.markdown("---")
+            st.markdown("<h2>A Secret Memory 🤫</h2>", unsafe_allow_html=True)
+            
+            with st.expander("Click to reveal Month 3 best memory..."):
+                st.write("Do you remember when we got completely lost looking for that taco place?")
+                st.info("🖼️ (Put a cute photo of you guys here!)")
+                
+            st.markdown("---")
+            st.write("Ready for the grand finale?")
+            final_btn = st.button("Click for Your Surprise!", key="final_btn")
+
+            if final_btn:
+                # --- TRANSITION 2: Final Click ---
+                st.toast('Loading the finale animation! Prepare for joy!')
+                
+                with st.spinner('Igniting celebratory engines...'):
+                    time.sleep(2)
+                
+                st.snow() 
+                st.success("WE DID IT! Can't wait for another 6 months of adventures!")
+                st.balloons()
+elif password != "":
+    st.error("Incorrect password! Come ON u got this babe")
+    
