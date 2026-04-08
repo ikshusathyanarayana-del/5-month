@@ -1,5 +1,6 @@
 import streamlit as st
 import time
+from datetime import datetime
 
 # --- 1. PAGE SETUP & BIGGER FONT CONFIGURATION ---
 st.set_page_config(page_title="6 Month Anniversary! ❤️", page_icon="💖", layout="centered")
@@ -7,7 +8,7 @@ st.set_page_config(page_title="6 Month Anniversary! ❤️", page_icon="💖", l
 # --- 2. THE DYNAMIC BACKGROUND & SCALING CSS ---
 st.markdown("""
 <style>
-/* 1. Dynamic background gradient (Restored!) */
+/* Dynamic background gradient */
 [data-testid="stAppViewContainer"] {
     background: linear-gradient(-45deg, #ff9a9e, #fecfef, #ff9a9e, #fecfef);
     background-size: 400% 400%;
@@ -20,13 +21,13 @@ st.markdown("""
     100% { background-position: 0% 50%; }
 }
 
-/* 2. Global scaling - Make everything bigger and informal */
+/* Global scaling */
 [data-testid="stMarkdownContainer"] p { font-size: 1.8rem !important; font-family: 'Comic Sans MS', cursive, sans-serif; color: #5D4037;}
 h1 { font-size: 5rem !important; font-family: 'Comic Sans MS', cursive, sans-serif; color: #8E242C; text-align: center;}
-h2 { font-size: 3rem !important; color: #8E242C;}
+h2 { font-size: 3rem !important; color: #8E242C; text-align: center;}
 h3 { font-size: 2rem !important; color: #5D4037;}
 
-/* 3. Button scaling and styling */
+/* Button scaling and styling */
 .stButton>button {
     font-size: 2.2rem !important;
     padding: 15px 40px !important;
@@ -44,18 +45,18 @@ h3 { font-size: 2rem !important; color: #5D4037;}
     box-shadow: 0px 6px 15px rgba(0,0,0,0.2) !important;
 }
 
-/* 4. Expander (Collapse box) scaling */
+/* Expander scaling */
 .streamlit-expanderHeader {
     font-size: 2rem !important;
 }
 
-/* 5. Metric scaling */
+/* Metric scaling */
 [data-testid="stMetricValue"] {
     font-size: 4rem !important;
     color: #8E242C;
 }
 
-/* 6. Define the Floating Hearts Background Animation */
+/* Floating Hearts Background Animation */
 @keyframes float {
   0% { transform: translateY(100vh) translateX(0px); opacity: 0; }
   10% { opacity: 1; }
@@ -63,15 +64,13 @@ h3 { font-size: 2rem !important; color: #5D4037;}
   100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
 }
 
-/* Base style for a single floating heart */
 .heart {
   position: fixed;
-  color: rgba(229, 115, 115, 0.5); /* Semi-transparent */
-  z-index: -1; /* Put behind existing Streamlit content */
+  color: rgba(229, 115, 115, 0.5); 
+  z-index: -1; 
   font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol";
 }
 
-/* Generate multiple hearts with different sizes, starting positions, and animation delays */
 .heart:nth-child(1) { font-size: 25px; left: 10%; animation: float 20s linear infinite; animation-delay: 0s; }
 .heart:nth-child(2) { font-size: 40px; left: 25%; animation: float 25s linear infinite; animation-delay: 2s; }
 .heart:nth-child(3) { font-size: 30px; left: 40%; animation: float 18s linear infinite; animation-delay: 4s; }
@@ -84,39 +83,51 @@ h3 { font-size: 2rem !important; color: #5D4037;}
 .heart:nth-child(10) { font-size: 55px; left: 60%; animation: float 23s linear infinite; animation-delay: 4s; }
 .heart:nth-child(11) { font-size: 38px; left: 75%; animation: float 27s linear infinite; animation-delay: 6s; }
 .heart:nth-child(12) { font-size: 48px; left: 90%; animation: float 16s linear infinite; animation-delay: 1s; }
-
 </style>
 
 <div class="heart-container">
-    <div class="heart">❤️</div>
-    <div class="heart">💖</div>
-    <div class="heart">💓</div>
-    <div class="heart">❤️</div>
-    <div class="heart">💖</div>
-    <div class="heart">💓</div>
-    <div class="heart">❤️</div>
-    <div class="heart">💖</div>
-    <div class="heart">💓</div>
-    <div class="heart">❤️</div>
-    <div class="heart">💖</div>
-    <div class="heart">💓</div>
+    <div class="heart">❤️</div><div class="heart">💖</div><div class="heart">💓</div>
+    <div class="heart">❤️</div><div class="heart">💖</div><div class="heart">💓</div>
+    <div class="heart">❤️</div><div class="heart">💖</div><div class="heart">💓</div>
+    <div class="heart">❤️</div><div class="heart">💖</div><div class="heart">💓</div>
 </div>
 """, unsafe_allow_html=True)
 
-# --- 3. THE APP CONTENT ---
+# --- 3. THE TIME LOCK LOGIC ---
 
-# Initial celebratory welcome
+# Set the exact unlock date: Year, Month, Day, Hour, Minute, Second
+# May 10th, 2026 at 00:00:00 (Midnight)
+UNLOCK_DATE = datetime(2026, 5, 10, 0, 0, 0)
+current_time = datetime.now()
+
+# If we haven't reached May 10th yet, show the countdown and STOP the app.
+if current_time < UNLOCK_DATE:
+    time_difference = UNLOCK_DATE - current_time
+    # Convert the time difference entirely into hours
+    hours_left = int(time_difference.total_seconds() / 3600)
+    
+    st.markdown("<h1>⏳ Top Secret Files ⏳</h1>", unsafe_allow_html=True)
+    st.markdown("<h2>Access is currently locked.</h2>", unsafe_allow_html=True)
+    
+    # Displays the giant hours counter
+    st.metric(label="Time Remaining Until May 10th:", value=f"{hours_left} Hours")
+    st.write("No peaking early! Check back when the clock strikes midnight. 💖")
+    
+    # This command stops Streamlit from reading the rest of the code!
+    st.stop()
+
+
+# --- 4. THE APP CONTENT (Only loads after May 10th) ---
+
 st.markdown("# 🥳 WELCOME! 🥳")
 st.write("Ready to check out our Top Secret Boyfriend Files?")
 
-# --- NEW PASSWORD GATE (101125) ---
 password = st.text_input("Enter the secret code (Hint: Our Date)", type="password")
 
 if password == "101125":
     start_btn = st.button("Access Granted! Click Here", key="start_btn")
 
     if start_btn:
-        # --- TRANSITION 1: Initial Click ---
         main_placeholder = st.empty()
         
         with main_placeholder.container():
@@ -145,7 +156,6 @@ if password == "101125":
             final_btn = st.button("Click for Your Surprise!", key="final_btn")
 
             if final_btn:
-                # --- TRANSITION 2: Final Click ---
                 st.toast('Loading the finale animation! Prepare for joy!')
                 
                 with st.spinner('Igniting celebratory engines...'):
@@ -155,5 +165,4 @@ if password == "101125":
                 st.success("WE DID IT! Can't wait for another 6 months of adventures!")
                 st.balloons()
 elif password != "":
-    st.error("Incorrect password! Come ON u got this babe")
-    
+    st.error("Incorrect password! Think harder! 😂")
