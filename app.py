@@ -5,25 +5,33 @@ import time
 # 1. Page Configuration (Updated to 6 Months)
 st.set_page_config(page_title="Happy 6 Months!", page_icon="❤️", layout="centered")
 
-# --- THE MAGIC CSS WITH ANIMATIONS ---
+# --- THE MAGIC CSS WITH DYNAMIC BACKGROUND AND STYLIZED ARROWS ---
 st.markdown("""
 <style>
-/* Background gradient */
+/* 1. Dynamic background gradient */
 [data-testid="stAppViewContainer"] {
-    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+    background: linear-gradient(-45deg, #ff9a9e, #fecfef, #ff9a9e, #fecfef);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
 }
 
-/* Red header bar */
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 2. Red header bar */
 [data-testid="stHeader"] {
     background-color: #ff3366;
 }
 
-/* Text color */
+/* 3. Text color */
 h1, h2, h3, p, .stMarkdown {
     color: #800020 !important; 
 }
 
-/* Beautiful buttons */
+/* 4. Beautiful buttons */
 div[data-testid="stButton"] button {
     background-color: #ff3366;
     color: white !important;
@@ -42,7 +50,7 @@ div[data-testid="stButton"] button:hover {
     box-shadow: 0px 6px 15px rgba(0,0,0,0.2);
 }
 
-/* The Heartbeat Animation */
+/* 5. The Heartbeat Animation */
 @keyframes heartbeat {
   0% { transform: scale(1); }
   14% { transform: scale(1.3); }
@@ -57,6 +65,26 @@ div[data-testid="stButton"] button:hover {
     animation: heartbeat 1.5s infinite;
     margin-top: -20px;
     margin-bottom: 20px;
+}
+
+/* 6. The Stylized Curly Arrows */
+@keyframes wiggle {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(5deg); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(-5deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.curly-arrow {
+    font-size: 80px;
+    text-align: center;
+    color: #ff3366;
+    margin: -10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: wiggle 3s infinite ease-in-out;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -89,17 +117,18 @@ if password.lower() == "pizza":
         
         st.subheader("Month 1: The Beginning 💘")
         st.write("Do you remember our first date? I was so nervous but...")
-        # Uncomment the line below and change the filename when you have a photo ready!
         # st.image("month_1.jpg", caption="Our first picture!")
         st.info("🖼️ (Put a cute photo of you guys here!)")
         
-        st.write("⬇️") 
+        # New Giant Wiggling Arrow
+        st.markdown('<div class="curly-arrow">➥</div>', unsafe_allow_html=True)
         
         st.subheader("Months 2-5: The Adventures 🏹")
         with st.expander("Click here for a secret memory 🤫"):
             st.write("Remember that time we got lost? Best detour ever.")
             
-        st.write("⬇️") 
+        # New Giant Wiggling Arrow
+        st.markdown('<div class="curly-arrow">➥</div>', unsafe_allow_html=True)
 
         st.subheader("Month 6: Right Now 💖")
         st.write("Half a year down, and I'm looking forward to everything coming next.")
