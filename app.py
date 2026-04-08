@@ -1,165 +1,148 @@
 import streamlit as st
-import random
 import time
 
-# 1. Page Configuration (Updated to 6 Months)
-st.set_page_config(page_title="Happy 6 Months!", page_icon="❤️", layout="centered")
+# --- 1. PAGE SETUP & BIGGER FONT CONFIGURATION ---
+# We use custom CSS to override standard Streamlit font sizes.
+st.set_page_config(page_title="6 Month Anniversary! ❤️", page_icon="💖", layout="centered")
 
-# --- THE MAGIC CSS WITH DYNAMIC BACKGROUND AND STYLIZED ARROWS ---
+# --- 2. THE FLOATING HEART BACKGROUND & SCALING CSS ---
+# This is where the magic happens.
+# - The @keyframes definitions create the 'float' animation.
+# - The CSS scales existing elements (headings, text, buttons, expanders) to look huge.
+# - Global font changed to a friendly Cursive/Sans-Serif mix for a less formal look.
 st.markdown("""
 <style>
-/* 1. Dynamic background gradient */
-[data-testid="stAppViewContainer"] {
-    background: linear-gradient(-45deg, #ff9a9e, #fecfef, #ff9a9e, #fecfef);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
-}
+/* Global scaling - Make everything bigger */
+[data-testid="stMarkdownContainer"] p { font-size: 1.8rem !important; font-family: 'Comic Sans MS', cursive, sans-serif; color: #5D4037;}
+h1 { font-size: 5rem !important; font-family: 'Comic Sans MS', cursive, sans-serif; color: #8E242C; text-align: center;}
+h2 { font-size: 3rem !important; color: #8E242C;}
+h3 { font-size: 2rem !important; color: #5D4037;}
 
-@keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* 2. Red header bar */
-[data-testid="stHeader"] {
-    background-color: #ff3366;
-}
-
-/* 3. Text color */
-h1, h2, h3, p, .stMarkdown {
-    color: #800020 !important; 
-}
-
-/* 4. Beautiful buttons */
-div[data-testid="stButton"] button {
-    background-color: #ff3366;
+/* Button scaling and styling */
+.stButton>button {
+    font-size: 2.2rem !important;
+    padding: 15px 40px !important;
+    border-radius: 50px !important;
+    background-color: #E57373 !important;
     color: white !important;
-    border-radius: 30px;
-    border: 2px solid white;
-    padding: 10px 24px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    border: none !important;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+.stButton>button:hover {
+    background-color: #EF5350 !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
 }
 
-/* Button Hover Animation */
-div[data-testid="stButton"] button:hover {
-    transform: translateY(-4px) scale(1.05);
-    background-color: #ff1a53;
-    box-shadow: 0px 6px 15px rgba(0,0,0,0.2);
+/* Expander (Collapse box) scaling */
+.streamlit-expanderHeader {
+    font-size: 2rem !important;
 }
 
-/* 5. The Heartbeat Animation */
-@keyframes heartbeat {
-  0% { transform: scale(1); }
-  14% { transform: scale(1.3); }
-  28% { transform: scale(1); }
-  42% { transform: scale(1.3); }
-  70% { transform: scale(1); }
+/* Metric scaling */
+[data-testid="stMetricValue"] {
+    font-size: 4rem !important;
+    color: #8E242C;
 }
 
-.beating-heart {
-    font-size: 120px;
-    text-align: center;
-    animation: heartbeat 1.5s infinite;
-    margin-top: -20px;
-    margin-bottom: 20px;
+/* Define the Floating Hearts Background Animation */
+@keyframes float {
+  0% { transform: translateY(100vh) translateX(0px); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
 }
 
-/* 6. The Stylized Curly Arrows */
-@keyframes wiggle {
-    0% { transform: rotate(0deg); }
-    25% { transform: rotate(5deg); }
-    50% { transform: rotate(0deg); }
-    75% { transform: rotate(-5deg); }
-    100% { transform: rotate(0deg); }
+/* Base style for a single floating heart */
+.heart {
+  position: fixed;
+  color: rgba(229, 115, 115, 0.5); /* Semi-transparent red/pink */
+  z-index: -1; /* Put behind existing Streamlit content */
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol";
 }
 
-.curly-arrow {
-    font-size: 80px;
-    text-align: center;
-    color: #ff3366;
-    margin: -10px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    animation: wiggle 3s infinite ease-in-out;
-}
+/* Generate multiple hearts with different sizes, starting positions, and animation delays */
+.heart:nth-child(1) { font-size: 25px; left: 10%; animation: float 20s linear infinite; animation-delay: 0s; }
+.heart:nth-child(2) { font-size: 40px; left: 25%; animation: float 25s linear infinite; animation-delay: 2s; }
+.heart:nth-child(3) { font-size: 30px; left: 40%; animation: float 18s linear infinite; animation-delay: 4s; }
+.heart:nth-child(4) { font-size: 50px; left: 55%; animation: float 22s linear infinite; animation-delay: 6s; }
+.heart:nth-child(5) { font-size: 35px; left: 70%; animation: float 28s linear infinite; animation-delay: 1s; }
+.heart:nth-child(6) { font-size: 45px; left: 85%; animation: float 15s linear infinite; animation-delay: 3s; }
+.heart:nth-child(7) { font-size: 28px; left: 15%; animation: float 21s linear infinite; animation-delay: 5s; }
+.heart:nth-child(8) { font-size: 42px; left: 30%; animation: float 24s linear infinite; animation-delay: 7s; }
+.heart:nth-child(9) { font-size: 33px; left: 45%; animation: float 19s linear infinite; animation-delay: 2s; }
+.heart:nth-child(10) { font-size: 55px; left: 60%; animation: float 23s linear infinite; animation-delay: 4s; }
+.heart:nth-child(11) { font-size: 38px; left: 75%; animation: float 27s linear infinite; animation-delay: 6s; }
+.heart:nth-child(12) { font-size: 48px; left: 90%; animation: float 16s linear infinite; animation-delay: 1s; }
+
 </style>
+
+<div class="heart-container">
+    <div class="heart">❤️</div>
+    <div class="heart">💖</div>
+    <div class="heart">💓</div>
+    <div class="heart">❤️</div>
+    <div class="heart">💖</div>
+    <div class="heart">💓</div>
+    <div class="heart">❤️</div>
+    <div class="heart">💖</div>
+    <div class="heart">💓</div>
+    <div class="heart">❤️</div>
+    <div class="heart">💖</div>
+    <div class="heart">💓</div>
+</div>
 """, unsafe_allow_html=True)
 
+# --- 3. THE APP CONTENT ---
 
-# 2. The Password Gate
-st.markdown("### 🔒 Top Secret Boyfriend Files")
-password = st.text_input("What is our secret word?", type="password")
+# Initial celebratory welcome
+st.markdown("# 🥳 WELCOME! 🥳")
+st.write("Ready to check out our Top Secret Boyfriend Files?")
+start_btn = st.button("Access Granted! Click Here", key="start_btn")
 
-# Remember to change "pizza" to your actual inside joke!
-if password.lower() == "pizza":
+if start_btn:
+    # --- TRANSITION 1: Initial Click ---
+    # We clear the screen manually using a placeholder
+    main_placeholder = st.empty()
     
-    # Trigger celebration!
-    st.balloons()
-    
-    # The Big Animated Heart
-    st.markdown('<div class="beating-heart">❤️</div>', unsafe_allow_html=True)
-    
-    # Centered Title (Updated to 6 Months)
-    st.markdown("<h1 style='text-align: center;'>Happy 6 Months!</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center; font-size: 1.2em;'>I built this little website just to say I love you.</p>", unsafe_allow_html=True)
-    
-    st.divider()
-
-    # --- THE TABS ---
-    tab1, tab2, tab3 = st.tabs(["🕰️ Our Story", "💌 Love Notes", "✨ Cosmic Match"])
-
-    with tab1:
-        st.header("Follow the timeline ➔")
+    with main_placeholder.container():
+        # Spinners simulate a transition loading state
+        with st.spinner('Accessing secure memory core...'):
+            time.sleep(1.5)
         
-        st.subheader("Month 1: The Beginning 💘")
-        st.write("Do you remember our first date? I was so nervous but...")
-        # st.image("month_1.jpg", caption="Our first picture!")
-        st.info("🖼️ (Put a cute photo of you guys here!)")
+        # Celebrate success!
+        st.balloons()
+        st.markdown("<h1>Our 6 Month Milestone!</h1>", unsafe_allow_html=True)
+        st.markdown("---")
         
-        # New Giant Wiggling Arrow
-        st.markdown('<div class="curly-arrow">➥</div>', unsafe_allow_html=True)
+        col1, col2 = st.columns(2)
+        with col1:
+            st.metric(label="Days We've Kept Each Other Happy", value="183 Days", delta="Since Month 1!")
+        with col2:
+            st.write("Wow, look how many days we have shared together!")
+
+        st.markdown("---")
+        st.markdown("<h2>A Secret Memory 🤫</h2>", unsafe_allow_html=True)
         
-        st.subheader("Months 2-5: The Adventures 🏹")
-        with st.expander("Click here for a secret memory 🤫"):
-            st.write("Remember that time we got lost? Best detour ever.")
+        # The 'expander' looks formal, but we scaled its text to be big.
+        with st.expander("Click to reveal Month 3 best memory..."):
+            st.write("Do you remember when we got completely lost looking for that taco place?")
+            st.image("https://upload.wikimedia.org/wikipedia/commons/e/e4/A_couple_at_sunset.jpg", 
+                     caption="A generic couple sunset image because I don't know you guys!", 
+                     use_column_width=True)
             
-        # New Giant Wiggling Arrow
-        st.markdown('<div class="curly-arrow">➥</div>', unsafe_allow_html=True)
+        st.markdown("---")
+        # Final celebratory button to provide another transition
+        st.write("Ready for the grand finale?")
+        final_btn = st.button("Click for Your Surprise!", key="final_btn")
 
-        st.subheader("Month 6: Right Now 💖")
-        st.write("Half a year down, and I'm looking forward to everything coming next.")
-
-    with tab2:
-        st.header("💌 5 Reasons I Love You")
-        st.write("Click the button below to see a random reason!")
-        
-        reasons = [
-            "Your beautiful smile.",
-            "How we can laugh at the dumbest things.",
-            "The way you support me.",
-            "Every single date we've been on.",
-            "Just being you."
-        ]
-        
-        if st.button("Click for a reason! 💌"):
-            with st.spinner("Finding the perfect reason..."):
-                time.sleep(0.8) 
-            st.success(random.choice(reasons))
-
-    with tab3:
-        st.header("✨ Our Cosmic Compatibility")
-        st.write("I ran the astrological charts and analyzed our palm lines...")
-        
-        if st.button("Calculate Match Score 🔭"):
-            st.snow()
-            st.metric(label="Final Score", value="100%", delta="Written in the stars! 🌠")
-
-    st.divider()
-    st.write("Made with ❤️ by me.")
-
-elif password:
-    st.error("Access Denied! Think harder! 😂")
+        if final_btn:
+            # --- TRANSITION 2: Final Click ---
+            # Using st.toast for a less formal transition notice
+            st.toast('Loading the finale animation! Prepare for joy!')
+            
+            with st.spinner('Igniting celebratory engines...'):
+                time.sleep(2)
+            
+            st.snow() # The snow animation looks cool and is clearly informal.
+            st.success("WE DID IT! Can't wait for another 6 months of adventures!")
+            st.balloons()
