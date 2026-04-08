@@ -1,6 +1,7 @@
 import streamlit as st
 import time
 from datetime import datetime
+import streamlit.components.v1 as components
 
 # --- 1. PAGE SETUP & BIGGER FONT CONFIGURATION ---
 st.set_page_config(page_title="6 Month Anniversary! ❤️", page_icon="💖", layout="centered")
@@ -50,12 +51,6 @@ h3 { font-size: 2rem !important; color: #5D4037;}
     font-size: 2rem !important;
 }
 
-/* Metric scaling */
-[data-testid="stMetricValue"] {
-    font-size: 4rem !important;
-    color: #8E242C;
-}
-
 /* Floating Hearts Background Animation */
 @keyframes float {
   0% { transform: translateY(100vh) translateX(0px); opacity: 0; }
@@ -93,30 +88,74 @@ h3 { font-size: 2rem !important; color: #5D4037;}
 </div>
 """, unsafe_allow_html=True)
 
-# --- 3. THE TIME LOCK LOGIC WITH DEVELOPER BACKDOOR ---
+# --- 3. THE TIME LOCK LOGIC WITH LIVE TICKING COUNTDOWN & BACKDOOR ---
 
-# May 10th, 2026 at 00:00:00 (Midnight)
 UNLOCK_DATE = datetime(2026, 5, 10, 0, 0, 0)
 current_time = datetime.now()
 
-# THE BACKDOOR: This checks the website URL for a secret "?dev=admin" tag
+# The Developer Backdoor URL check
 is_developer = st.query_params.get("dev") == "admin"
 
-# If it's before May 10th AND you are not using the secret developer link, show the lock!
 if current_time < UNLOCK_DATE and not is_developer:
-    time_difference = UNLOCK_DATE - current_time
-    hours_left = int(time_difference.total_seconds() / 3600)
-    
     st.markdown("<h1>⏳ Top Secret Files ⏳</h1>", unsafe_allow_html=True)
     st.markdown("<h2>Access is currently locked.</h2>", unsafe_allow_html=True)
     
-    st.metric(label="Time Remaining :", value=f"{hours_left} Hours")
-    st.write("No peeking early! Check back when the clock strikes midnight. 💖")
+    # --- THE LIVE COUNTDOWN WIDGET ---
+    countdown_html = """
+    <style>
+    body {
+        margin: 0; display: flex; justify-content: center; align-items: center;
+        font-family: 'Comic Sans MS', cursive, sans-serif; color: #8E242C;
+    }
+    .countdown-container { display: flex; gap: 15px; text-align: center; }
+    .time-box {
+        background: rgba(255, 255, 255, 0.6); padding: 15px 20px;
+        border-radius: 15px; border: 2px solid white;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.1); width: 80px;
+    }
+    .number { font-size: 3rem; font-weight: bold; }
+    .label { font-size: 1rem; color: #5D4037; margin-top: 5px; font-weight: bold;}
+    </style>
     
-    # Stops Streamlit from loading the rest of the site for her
+    <div class="countdown-container">
+        <div class="time-box"><div class="number" id="days">--</div><div class="label">DAYS</div></div>
+        <div class="time-box"><div class="number" id="hours">--</div><div class="label">HOURS</div></div>
+        <div class="time-box"><div class="number" id="mins">--</div><div class="label">MINS</div></div>
+        <div class="time-box"><div class="number" id="secs">--</div><div class="label">SECS</div></div>
+    </div>
+    
+    <script>
+    var countDownDate = new Date("May 10, 2026 00:00:00").getTime();
+    var x = setInterval(function() {
+      var now = new Date().getTime();
+      var distance = countDownDate - now;
+
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerHTML = days;
+      document.getElementById("hours").innerHTML = hours;
+      document.getElementById("mins").innerHTML = minutes;
+      document.getElementById("secs").innerHTML = seconds;
+
+      if (distance < 0) {
+        clearInterval(x);
+        document.querySelector(".countdown-container").innerHTML = "<h2>Time's up! Refresh the page! 🎉</h2>";
+      }
+    }, 1000);
+    </script>
+    """
+    
+    # Render the widget inside Streamlit
+    components.html(countdown_html, height=180)
+    
+    st.markdown("<p style='text-align: center;'>No peeking early! Check back when the clock strikes midnight. 💖</p>", unsafe_allow_html=True)
     st.stop()
 
-# --- 4. THE APP CONTENT (Only loads after May 10th) ---
+
+# --- 4. THE APP CONTENT ---
 
 st.markdown("# 🥳 WELCOME! 🥳")
 st.write("Ready to check out our Top Secret Boyfriend Files?")
