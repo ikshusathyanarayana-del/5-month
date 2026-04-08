@@ -2,10 +2,10 @@ import streamlit as st
 import random
 import time
 
-# 1. Page Configuration
-st.set_page_config(page_title="Happy 5 Months!", page_icon="❤️", layout="centered")
+# 1. Page Configuration (Updated to 6 Months)
+st.set_page_config(page_title="Happy 6 Months!", page_icon="❤️", layout="centered")
 
-# --- THE UPGRADED MAGIC CSS WITH ANIMATIONS ---
+# --- THE MAGIC CSS WITH ANIMATIONS ---
 st.markdown("""
 <style>
 /* Background gradient */
@@ -42,7 +42,7 @@ div[data-testid="stButton"] button:hover {
     box-shadow: 0px 6px 15px rgba(0,0,0,0.2);
 }
 
-/* --- THE HEARTBEAT ANIMATION --- */
+/* The Heartbeat Animation */
 @keyframes heartbeat {
   0% { transform: scale(1); }
   14% { transform: scale(1.3); }
@@ -66,21 +66,22 @@ div[data-testid="stButton"] button:hover {
 st.markdown("### 🔒 Top Secret Boyfriend Files")
 password = st.text_input("What is our secret word?", type="password")
 
+# Remember to change "pizza" to your actual inside joke!
 if password.lower() == "pizza":
     
     # Trigger celebration!
     st.balloons()
     
-    # --- THE BIG ANIMATED HEART ---
+    # The Big Animated Heart
     st.markdown('<div class="beating-heart">❤️</div>', unsafe_allow_html=True)
     
-    # Centered Title
-    st.markdown("<h1 style='text-align: center;'>Happy 5 Months!</h1>", unsafe_allow_html=True)
+    # Centered Title (Updated to 6 Months)
+    st.markdown("<h1 style='text-align: center;'>Happy 6 Months!</h1>", unsafe_allow_html=True)
     st.markdown("<p style='text-align: center; font-size: 1.2em;'>I built this little website just to say I love you.</p>", unsafe_allow_html=True)
     
     st.divider()
 
-    # --- TABS TO FIX SCROLLING ---
+    # --- THE TABS ---
     tab1, tab2, tab3 = st.tabs(["🕰️ Our Story", "💌 Love Notes", "✨ Cosmic Match"])
 
     with tab1:
@@ -88,18 +89,20 @@ if password.lower() == "pizza":
         
         st.subheader("Month 1: The Beginning 💘")
         st.write("Do you remember our first date? I was so nervous but...")
+        # Uncomment the line below and change the filename when you have a photo ready!
+        # st.image("month_1.jpg", caption="Our first picture!")
         st.info("🖼️ (Put a cute photo of you guys here!)")
         
         st.write("⬇️") 
         
-        st.subheader("Months 2-4: The Adventures 🏹")
+        st.subheader("Months 2-5: The Adventures 🏹")
         with st.expander("Click here for a secret memory 🤫"):
             st.write("Remember that time we got lost? Best detour ever.")
             
         st.write("⬇️") 
 
-        st.subheader("Month 5: Right Now 💖")
-        st.write("Five months in and I'm looking forward to everything coming next.")
+        st.subheader("Month 6: Right Now 💖")
+        st.write("Half a year down, and I'm looking forward to everything coming next.")
 
     with tab2:
         st.header("💌 5 Reasons I Love You")
