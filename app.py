@@ -4,7 +4,7 @@ from datetime import datetime
 import streamlit.components.v1 as components
 
 # --- 1. PAGE SETUP & BIGGER FONT CONFIGURATION ---
-st.set_page_config(page_title="6 Month Anniversary! ❤️", page_icon="💖", layout="centered")
+st.set_page_config(page_title="my little surprise for you", page_icon="💖", layout="centered")
 
 # --- 2. THE DYNAMIC BACKGROUND & SCALING CSS ---
 st.markdown("""
