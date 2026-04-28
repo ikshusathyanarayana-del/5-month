@@ -148,9 +148,7 @@ if current_time < UNLOCK_DATE and not is_developer:
     </script>
     """
     
-    # Render the widget inside Streamlit
     components.html(countdown_html, height=180)
-    
     st.markdown("<p style='text-align: center;'>No peeking early! Check back when the clock strikes midnight. 💖</p>", unsafe_allow_html=True)
     st.stop()
 
@@ -176,19 +174,50 @@ if password == "101125":
             st.markdown("<h1>Our 6 Month Milestone!</h1>", unsafe_allow_html=True)
             st.markdown("---")
             
-            col1, col2 = st.columns(2)
-            with col1:
-                st.metric(label="Days We've Kept Each Other Happy", value="183 Days", delta="Since Month 1!")
-            with col2:
-                st.write("Wow, look how many days we have shared together!")
-
+            # --- THE TIMELINE PHOTOS ---
+            st.markdown("<h2>The Early Days</h2>", unsafe_allow_html=True)
+            st.write("Back when we spent half our lives on video calls...")
+            st.image("starting days.jpeg", caption="Where it all began ❤️", use_container_width=True) 
+            
             st.markdown("---")
             st.markdown("<h2>A Secret Memory 🤫</h2>", unsafe_allow_html=True)
             
-            with st.expander("Click to reveal Month 3 best memory..."):
-                st.write("Do you remember when we got completely lost looking for that taco place?")
-                st.info("🖼️ (Put a cute photo of you guys here!)")
+            with st.expander("Click to reveal..."):
+                st.write("Our late-night Discord calls were the best part of my day.")
+                st.image("video call SS 1.jpeg", caption="😂", use_container_width=True) 
                 
+            st.markdown("---")
+            st.markdown("<h2>Right Now 💖</h2>", unsafe_allow_html=True)
+            st.write("Half a year down, and I'm looking forward to everything coming next.")
+            st.image("us.jpeg", caption="Us.", use_container_width=True)
+
+            st.markdown("---")
+            
+            # --- THE MASSIVE PHOTO GRID ---
+            st.markdown("<h2>📸 Our Favorite Memories 📸</h2>", unsafe_allow_html=True)
+            
+            # Splitting the remaining 16 images across 3 columns
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.image("discord 1.jpeg", use_container_width=True)
+                st.image("her 1.jpeg", use_container_width=True)
+                st.image("her smile 3.jpeg", use_container_width=True)
+                st.image("selfie 3.jpeg", use_container_width=True)
+                st.image("she kiss me.jpeg", use_container_width=True)
+            with col2:
+                st.image("discord 2.jpeg", use_container_width=True)
+                st.image("discord 4.jpeg", use_container_width=True)
+                st.image("her eyes 1.jpeg", use_container_width=True)
+                st.image("selfie 1.jpeg", use_container_width=True)
+                st.image("selfie 4.jpeg", use_container_width=True)
+                st.image("her smile.jpeg", use_container_width=True)
+            with col3:
+                st.image("discord 3.jpeg", use_container_width=True)
+                st.image("her smile 2.jpeg", use_container_width=True)
+                st.image("me kiss her.jpeg", use_container_width=True)
+                st.image("selfie 2.jpeg", use_container_width=True)
+                st.image("selfie 5.jpeg", use_container_width=True)
+            
             st.markdown("---")
             st.write("Ready for the grand finale?")
             final_btn = st.button("Click for Your Surprise!", key="final_btn")
