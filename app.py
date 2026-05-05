@@ -176,7 +176,7 @@ if password == "101125":
             
             # --- THE TIMELINE PHOTOS ---
             st.markdown("<h2>The Early Days</h2>", unsafe_allow_html=True)
-            st.write("Back when we spent half our lives on video calls...")
+            st.write("Back when we spent half our lives PBL...")
             st.image("starting days.jpeg", caption="Where it all began ❤️", use_container_width=True) 
             
             st.markdown("---")
