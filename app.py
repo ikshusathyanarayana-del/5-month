@@ -199,7 +199,7 @@ if password == "101125":
             # Splitting the remaining 16 images across 3 columns
             col1, col2, col3 = st.columns(3)
             with col1:
-                st.image("video cal SS 1.jpeg", use_container_width=True)
+                st.image("video call SS 1.jpeg", use_container_width=True)
                 st.image("her 1.jpeg", use_container_width=True)
                 st.image("her smile 3.jpeg", use_container_width=True)
                 st.image("selfie 3.jpeg", use_container_width=True)
