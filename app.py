@@ -9,6 +9,12 @@ import json
 # --- 1. PAGE SETUP & BIGGER FONT CONFIGURATION ---
 st.set_page_config(page_title="my little surprise for you", page_icon="💖", layout="centered")
 
+# Initialize Session State (The Website's "Memory")
+if "app_unlocked" not in st.session_state:
+    st.session_state.app_unlocked = False
+if "show_letter" not in st.session_state:
+    st.session_state.show_letter = False
+
 # --- 2. THE DYNAMIC BACKGROUND & SCALING CSS ---
 st.markdown("""
 <style>
@@ -169,116 +175,135 @@ st.write("Ready to check out our Top Secret Boyfriend Files?")
 password = st.text_input("Enter the secret code (Hint: Our Date)", type="password")
 
 if password == "101125":
-    start_btn = st.button("Access Granted! Click Here", key="start_btn")
+    
+    # 1. The Access Button (Uses Session State memory)
+    if not st.session_state.app_unlocked:
+        if st.button("Access Granted! Click Here", key="start_btn"):
+            st.session_state.app_unlocked = True
+            st.rerun() # Tells Streamlit to refresh and remember we are unlocked
 
-    if start_btn:
-        main_placeholder = st.empty()
+    # 2. Main Dashboard (Only loads if memory says it's unlocked)
+    if st.session_state.app_unlocked:
+            
+        st.balloons()
+        st.markdown("<h1>Our 6 Month Milestone!</h1>", unsafe_allow_html=True)
+        st.markdown("---")
         
-        with main_placeholder.container():
-            with st.spinner('Accessing secure memory core...'):
-                time.sleep(1.5)
+        tab_story, tab_gallery = st.tabs(["🕰️ Our Story", "📸 Full Gallery"])
+        
+        # === TAB 1: THE STORY & SLIDESHOW ===
+        with tab_story:
+            st.markdown("<h2>The Early Days</h2>", unsafe_allow_html=True)
+            st.write("Back when we spent half our lives PBL...")
+            st.image("starting days.jpeg", caption="Where it all began ❤️", use_container_width=True) 
             
-            st.balloons()
-            st.markdown("<h1>Our 6 Month Milestone!</h1>", unsafe_allow_html=True)
             st.markdown("---")
+            st.markdown("<h2>A Secret Memory 🤫</h2>", unsafe_allow_html=True)
             
-            # --- CREATING THE TWO TABS ---
-            tab_story, tab_gallery = st.tabs(["🕰️ Our Story", "📸 Full Gallery"])
+            with st.expander("Click to reveal..."):
+                st.write("Our late-night Discord calls were the best part of my day.")
+                st.image("discord 1.jpeg", caption="😂", use_container_width=True) 
+                
+            st.markdown("---")
+            st.markdown("<h2>Right Now 💖</h2>", unsafe_allow_html=True)
+            st.write("Half a year down, and I'm looking forward to everything coming next.")
+            st.image("us .jpeg", caption="Us.", use_container_width=True)
+
+            st.markdown("---")
+            st.markdown("<h2>🎬 Memory Reel 🎬</h2>", unsafe_allow_html=True)
+            st.write("A quick look back at all the smiles...")
             
-            # === TAB 1: THE STORY & SLIDESHOW ===
-            with tab_story:
-                st.markdown("<h2>The Early Days</h2>", unsafe_allow_html=True)
-                st.write("Back when we spent half our lives PBL...")
-                st.image("starting days.jpeg", caption="Where it all began ❤️", use_container_width=True) 
-                
-                st.markdown("---")
-                st.markdown("<h2>A Secret Memory 🤫</h2>", unsafe_allow_html=True)
-                
-                with st.expander("Click to reveal..."):
-                    st.write("Our late-night Discord calls were the best part of my day.")
-                    st.image("discord 1.jpeg", caption="😂", use_container_width=True) 
-                    
-                st.markdown("---")
-                st.markdown("<h2>Right Now 💖</h2>", unsafe_allow_html=True)
-                st.write("Half a year down, and I'm looking forward to everything coming next.")
-                st.image("us .jpeg", caption="Us.", use_container_width=True)
-
-                st.markdown("---")
-                st.markdown("<h2>🎬 Memory Reel 🎬</h2>", unsafe_allow_html=True)
-                st.write("A quick look back at all the smiles...")
-                
-                # Setup the images for the slideshow
-                gallery_images = [
-                    "video call SS 1.jpeg", "her 1.jpeg", "her smile 3.jpeg", "selfie 3.jpeg", "she kiss me.jpeg",
-                    "discord 2.jpeg", "discord 4.jpeg", "her eyes 1.jpeg", "selfie 1.jpeg", "selfie 4.jpeg", "her smile.jpeg",
-                    "discord 3.jpeg", "her smile 2.jpeg", "me kiss her.jpeg", "selfie 2.jpeg", "selfie 5.jpeg"
-                ]
-                
-                # Convert images to base64 so HTML can read them
-                b64_imgs = [f"data:image/jpeg;base64,{get_base64_image(img)}" for img in gallery_images if get_base64_image(img)]
-                
-                if b64_imgs:
-                    slideshow_html = f"""
-                    <div style="display: flex; justify-content: center; width: 100%;">
-                        <img id="slideshow-img" src="{b64_imgs[0]}" style="width: 100%; max-width: 450px; height: 500px; object-fit: cover; border-radius: 15px; border: 3px solid white; box-shadow: 0px 4px 15px rgba(0,0,0,0.2); transition: opacity 0.5s ease-in-out;">
-                    </div>
-                    <script>
-                        var images = {json.dumps(b64_imgs)};
-                        var i = 0;
-                        var imgElem = document.getElementById("slideshow-img");
-                        setInterval(function() {{
-                            imgElem.style.opacity = 0; // fade out
-                            setTimeout(function() {{
-                                i = (i + 1) % images.length;
-                                imgElem.src = images[i];
-                                imgElem.style.opacity = 1; // fade in
-                            }}, 500);
-                        }}, 3000); // Change image every 3 seconds
-                    </script>
-                    """
-                    components.html(slideshow_html, height=550)
-                else:
-                    st.write("(Upload your images to GitHub to see the slideshow!)")
-
-                st.markdown("---")
-                st.write("Ready for the grand finale?")
-                final_btn = st.button("Click for Your Surprise!", key="final_btn")
-
-                if final_btn:
-                    st.toast('Loading the finale animation! Prepare for joy!')
-                    
-                    with st.spinner('Igniting celebratory engines...'):
-                        time.sleep(2)
-                    
-                    st.snow() 
-                    st.success("WE DID IT! Can't wait for another 6 months of adventures!")
-                    st.balloons()
+            # Setup the images for the slideshow
+            gallery_images = [
+                "video call SS 1.jpeg", "her 1.jpeg", "her smile 3.jpeg", "selfie 3.jpeg", "she kiss me.jpeg",
+                "discord 2.jpeg", "discord 4.jpeg", "her eyes 1.jpeg", "selfie 1.jpeg", "selfie 4.jpeg", "her smile.jpeg",
+                "discord 3.jpeg", "her smile 2.jpeg", "me kiss her.jpeg", "selfie 2.jpeg", "selfie 5.jpeg"
+            ]
             
-            # === TAB 2: THE FULL GALLERY GRID ===
-            with tab_gallery:
-                st.markdown("<h2>📸 All Our Memories 📸</h2>", unsafe_allow_html=True)
-                st.write("Take your time looking through all of them here.")
+            # Convert images to base64 so HTML can read them
+            b64_imgs = [f"data:image/jpeg;base64,{get_base64_image(img)}" for img in gallery_images if get_base64_image(img)]
+            
+            if b64_imgs:
+                slideshow_html = f"""
+                <div style="display: flex; justify-content: center; width: 100%;">
+                    <img id="slideshow-img" src="{b64_imgs[0]}" style="width: 100%; max-width: 450px; height: 500px; object-fit: cover; border-radius: 15px; border: 3px solid white; box-shadow: 0px 4px 15px rgba(0,0,0,0.2); transition: opacity 0.5s ease-in-out;">
+                </div>
+                <script>
+                    var images = {json.dumps(b64_imgs)};
+                    var i = 0;
+                    var imgElem = document.getElementById("slideshow-img");
+                    setInterval(function() {{
+                        imgElem.style.opacity = 0; // fade out
+                        setTimeout(function() {{
+                            i = (i + 1) % images.length;
+                            imgElem.src = images[i];
+                            imgElem.style.opacity = 1; // fade in
+                        }}, 500);
+                    }}, 3000); // Change image every 3 seconds
+                </script>
+                """
+                components.html(slideshow_html, height=550)
+            else:
+                st.write("(Upload your images to GitHub to see the slideshow!)")
+
+            st.markdown("---")
+            st.write("Ready for the grand finale?")
+            
+            # --- THE NEW SURPRISE BUTTON LOGIC ---
+            if not st.session_state.show_letter:
+                if st.button("Click for Your Surprise!", key="final_btn"):
+                    st.session_state.show_letter = True
+                    st.rerun() # Refresh to show the letter
+
+            if st.session_state.show_letter:
+                st.snow() 
                 
-                col1, col2, col3 = st.columns(3)
-                with col1:
-                    st.image("video call SS 1.jpeg", use_container_width=True)
-                    st.image("her 1.jpeg", use_container_width=True)
-                    st.image("her smile 3.jpeg", use_container_width=True)
-                    st.image("selfie 3.jpeg", use_container_width=True)
-                    st.image("she kiss me.jpeg", use_container_width=True)
-                with col2:
-                    st.image("discord 2.jpeg", use_container_width=True)
-                    st.image("discord 4.jpeg", use_container_width=True)
-                    st.image("her eyes 1.jpeg", use_container_width=True)
-                    st.image("selfie 1.jpeg", use_container_width=True)
-                    st.image("selfie 4.jpeg", use_container_width=True)
-                    st.image("her smile.jpeg", use_container_width=True)
-                with col3:
-                    st.image("discord 3.jpeg", use_container_width=True)
-                    st.image("her smile 2.jpeg", use_container_width=True)
-                    st.image("me kiss her.jpeg", use_container_width=True)
-                    st.image("selfie 2.jpeg", use_container_width=True)
-                    st.image("selfie 5.jpeg", use_container_width=True)
+                # --- THE LOVE LETTER (Edit your text here!) ---
+                letter_html = """
+                <div style="background-color: #fdf6e3; padding: 40px; border-radius: 10px; box-shadow: 2px 5px 15px rgba(0,0,0,0.15); border: 2px solid #e0d0b8; margin-top: 30px;">
+                    <h2 style="color: #8E242C; text-align: center; font-family: 'Comic Sans MS', cursive;">💌 My Letter to You 💌</h2>
+                    <p style="font-size: 1.5rem; color: #5D4037; line-height: 1.8; font-family: 'Comic Sans MS', cursive; white-space: pre-wrap;">
+My Dearest,
+
+[WRITE YOUR LOVE LETTER HERE!] 
+
+You can type as many paragraphs as you want. Just keep it between the <p> and </p> tags in the code, and it will magically format itself to look like beautiful handwriting on a scroll.
+
+Happy 6 Months! Here is to many more.
+
+Love,
+[Your Name]
+                    </p>
+                </div>
+                """
+                st.markdown(letter_html, unsafe_allow_html=True)
+                st.success("WE DID IT! Can't wait for another 6 months of adventures!")
+        
+        # === TAB 2: THE FULL GALLERY GRID ===
+        with tab_gallery:
+            st.markdown("<h2>📸 All Our Memories 📸</h2>", unsafe_allow_html=True)
+            st.write("Take your time looking through all of them here.")
+            
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.image("video call SS 1.jpeg", use_container_width=True)
+                st.image("her 1.jpeg", use_container_width=True)
+                st.image("her smile 3.jpeg", use_container_width=True)
+                st.image("selfie 3.jpeg", use_container_width=True)
+                st.image("she kiss me.jpeg", use_container_width=True)
+            with col2:
+                st.image("discord 2.jpeg", use_container_width=True)
+                st.image("discord 4.jpeg", use_container_width=True)
+                st.image("her eyes 1.jpeg", use_container_width=True)
+                st.image("selfie 1.jpeg", use_container_width=True)
+                st.image("selfie 4.jpeg", use_container_width=True)
+                st.image("her smile.jpeg", use_container_width=True)
+            with col3:
+                st.image("discord 3.jpeg", use_container_width=True)
+                st.image("her smile 2.jpeg", use_container_width=True)
+                st.image("me kiss her.jpeg", use_container_width=True)
+                st.image("selfie 2.jpeg", use_container_width=True)
+                st.image("selfie 5.jpeg", use_container_width=True)
 
 elif password != "":
     st.error("Incorrect password! Think harder! 😂")
