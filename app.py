@@ -9,7 +9,7 @@ import json
 # --- 1. PAGE SETUP & BIGGER FONT CONFIGURATION ---
 st.set_page_config(page_title="my little surprise for you", page_icon="💖", layout="centered")
 
-# Initialize Session State (The Website's "Memory")
+# Initialize Session State
 if "app_unlocked" not in st.session_state:
     st.session_state.app_unlocked = False
 if "show_letter" not in st.session_state:
@@ -18,7 +18,6 @@ if "show_letter" not in st.session_state:
 # --- 2. THE DYNAMIC BACKGROUND & SCALING CSS ---
 st.markdown("""
 <style>
-/* Dynamic background gradient */
 [data-testid="stAppViewContainer"] {
     background: linear-gradient(-45deg, #ff9a9e, #fecfef, #ff9a9e, #fecfef);
     background-size: 400% 400%;
@@ -31,13 +30,11 @@ st.markdown("""
     100% { background-position: 0% 50%; }
 }
 
-/* Global scaling */
 [data-testid="stMarkdownContainer"] p { font-size: 1.8rem !important; font-family: 'Comic Sans MS', cursive, sans-serif; color: #5D4037;}
 h1 { font-size: 5rem !important; font-family: 'Comic Sans MS', cursive, sans-serif; color: #8E242C; text-align: center;}
 h2 { font-size: 3rem !important; color: #8E242C; text-align: center;}
 h3 { font-size: 2rem !important; color: #5D4037;}
 
-/* Button scaling and styling */
 .stButton>button {
     font-size: 2.2rem !important;
     padding: 15px 40px !important;
@@ -55,12 +52,8 @@ h3 { font-size: 2rem !important; color: #5D4037;}
     box-shadow: 0px 6px 15px rgba(0,0,0,0.2) !important;
 }
 
-/* Expander scaling */
-.streamlit-expanderHeader {
-    font-size: 2rem !important;
-}
+.streamlit-expanderHeader { font-size: 2rem !important; }
 
-/* Floating Hearts Background Animation */
 @keyframes float {
   0% { transform: translateY(100vh) translateX(0px); opacity: 0; }
   10% { opacity: 1; }
@@ -69,9 +62,7 @@ h3 { font-size: 2rem !important; color: #5D4037;}
 }
 
 .heart {
-  position: fixed;
-  color: rgba(229, 115, 115, 0.5); 
-  z-index: -1; 
+  position: fixed; color: rgba(229, 115, 115, 0.5); z-index: -1; 
   font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol";
 }
 
@@ -98,17 +89,15 @@ h3 { font-size: 2rem !important; color: #5D4037;}
 """, unsafe_allow_html=True)
 
 # --- HELPER FUNCTION FOR SLIDESHOW ---
-def get_base64_image(file_name):
-    if os.path.exists(file_name):
-        with open(file_name, "rb") as f:
+def get_base64_image(file_data):
+    if isinstance(file_data, str) and os.path.exists(file_data):
+        with open(file_data, "rb") as f:
             return base64.b64encode(f.read()).decode()
     return ""
 
-# --- 3. THE TIME LOCK LOGIC WITH LIVE TICKING COUNTDOWN & BACKDOOR ---
-
+# --- 3. THE TIME LOCK LOGIC ---
 UNLOCK_DATE = datetime(2026, 5, 10, 0, 0, 0)
 current_time = datetime.now()
-
 is_developer = st.query_params.get("dev") == "admin"
 
 if current_time < UNLOCK_DATE and not is_developer:
@@ -117,58 +106,37 @@ if current_time < UNLOCK_DATE and not is_developer:
     
     countdown_html = """
     <style>
-    body {
-        margin: 0; display: flex; justify-content: center; align-items: center;
-        font-family: 'Comic Sans MS', cursive, sans-serif; color: #8E242C;
-    }
+    body { margin: 0; display: flex; justify-content: center; align-items: center; font-family: 'Comic Sans MS', cursive, sans-serif; color: #8E242C; }
     .countdown-container { display: flex; gap: 15px; text-align: center; }
-    .time-box {
-        background: rgba(255, 255, 255, 0.6); padding: 15px 20px;
-        border-radius: 15px; border: 2px solid white;
-        box-shadow: 0px 4px 10px rgba(0,0,0,0.1); width: 80px;
-    }
+    .time-box { background: rgba(255, 255, 255, 0.6); padding: 15px 20px; border-radius: 15px; border: 2px solid white; box-shadow: 0px 4px 10px rgba(0,0,0,0.1); width: 80px; }
     .number { font-size: 3rem; font-weight: bold; }
     .label { font-size: 1rem; color: #5D4037; margin-top: 5px; font-weight: bold;}
     </style>
-    
     <div class="countdown-container">
         <div class="time-box"><div class="number" id="days">--</div><div class="label">DAYS</div></div>
         <div class="time-box"><div class="number" id="hours">--</div><div class="label">HOURS</div></div>
         <div class="time-box"><div class="number" id="mins">--</div><div class="label">MINS</div></div>
         <div class="time-box"><div class="number" id="secs">--</div><div class="label">SECS</div></div>
     </div>
-    
     <script>
     var countDownDate = new Date("May 10, 2026 00:00:00").getTime();
     var x = setInterval(function() {
       var now = new Date().getTime();
       var distance = countDownDate - now;
-
-      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      document.getElementById("days").innerHTML = days;
-      document.getElementById("hours").innerHTML = hours;
-      document.getElementById("mins").innerHTML = minutes;
-      document.getElementById("secs").innerHTML = seconds;
-
-      if (distance < 0) {
-        clearInterval(x);
-        document.querySelector(".countdown-container").innerHTML = "<h2>Time's up! Refresh the page! 🎉</h2>";
-      }
+      document.getElementById("days").innerHTML = Math.floor(distance / (1000 * 60 * 60 * 24));
+      document.getElementById("hours").innerHTML = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      document.getElementById("mins").innerHTML = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      document.getElementById("secs").innerHTML = Math.floor((distance % (1000 * 60)) / 1000);
+      if (distance < 0) { clearInterval(x); document.querySelector(".countdown-container").innerHTML = "<h2>Time's up! Refresh the page! 🎉</h2>"; }
     }, 1000);
     </script>
     """
-    
     components.html(countdown_html, height=180)
     st.markdown("<p style='text-align: center;'>No peeking early! Check back when the clock strikes midnight. 💖</p>", unsafe_allow_html=True)
     st.stop()
 
 
 # --- 4. THE APP CONTENT ---
-
 st.markdown("# 🥳 WELCOME! 🥳")
 st.write("Ready to check out our Top Secret Boyfriend Files?")
 
@@ -176,20 +144,20 @@ password = st.text_input("Enter the secret code (Hint: Our Date)", type="passwor
 
 if password == "101125":
     
-    # 1. The Access Button (Uses Session State memory)
     if not st.session_state.app_unlocked:
         if st.button("Access Granted! Click Here", key="start_btn"):
             st.session_state.app_unlocked = True
-            st.rerun() # Tells Streamlit to refresh and remember we are unlocked
+            st.rerun() 
 
-    # 2. Main Dashboard (Only loads if memory says it's unlocked)
     if st.session_state.app_unlocked:
             
         st.balloons()
         st.markdown("<h1>Our 6 Month Milestone!</h1>", unsafe_allow_html=True)
         st.markdown("---")
         
-        tab_story, tab_gallery = st.tabs(["🕰️ Our Story", "📸 Full Gallery"])
+        # --- THE THREE TABS ---
+        tab_story, tab_gallery, tab_music = st.tabs(["🕰️ Our Story", "📸 Full Gallery", "🎧 Our Mixtape"])
+        
         
         # === TAB 1: THE STORY & SLIDESHOW ===
         with tab_story:
@@ -207,21 +175,19 @@ if password == "101125":
             st.markdown("---")
             st.markdown("<h2>Right Now 💖</h2>", unsafe_allow_html=True)
             st.write("Half a year down, and I'm looking forward to everything coming next.")
-            st.image("us .jpeg", caption="Us.", use_container_width=True)
+            st.image("us.jpeg", caption="Us.", use_container_width=True)
 
             st.markdown("---")
             st.markdown("<h2>🎬 Memory Reel 🎬</h2>", unsafe_allow_html=True)
             st.write("A quick look back at all the smiles...")
             
-            # Setup the images for the slideshow
-            gallery_images = [
+            github_images = [
                 "video call SS 1.jpeg", "her 1.jpeg", "her smile 3.jpeg", "selfie 3.jpeg", "she kiss me.jpeg",
                 "discord 2.jpeg", "discord 4.jpeg", "her eyes 1.jpeg", "selfie 1.jpeg", "selfie 4.jpeg", "her smile.jpeg",
                 "discord 3.jpeg", "her smile 2.jpeg", "me kiss her.jpeg", "selfie 2.jpeg", "selfie 5.jpeg"
             ]
             
-            # Convert images to base64 so HTML can read them
-            b64_imgs = [f"data:image/jpeg;base64,{get_base64_image(img)}" for img in gallery_images if get_base64_image(img)]
+            b64_imgs = [f"data:image/jpeg;base64,{get_base64_image(img)}" for img in github_images if get_base64_image(img)]
             
             if b64_imgs:
                 slideshow_html = f"""
@@ -233,13 +199,13 @@ if password == "101125":
                     var i = 0;
                     var imgElem = document.getElementById("slideshow-img");
                     setInterval(function() {{
-                        imgElem.style.opacity = 0; // fade out
+                        imgElem.style.opacity = 0; 
                         setTimeout(function() {{
                             i = (i + 1) % images.length;
                             imgElem.src = images[i];
-                            imgElem.style.opacity = 1; // fade in
+                            imgElem.style.opacity = 1; 
                         }}, 500);
-                    }}, 3000); // Change image every 3 seconds
+                    }}, 3000); 
                 </script>
                 """
                 components.html(slideshow_html, height=550)
@@ -249,16 +215,13 @@ if password == "101125":
             st.markdown("---")
             st.write("Ready for the grand finale?")
             
-            # --- THE NEW SURPRISE BUTTON LOGIC ---
             if not st.session_state.show_letter:
                 if st.button("Click for Your Surprise!", key="final_btn"):
                     st.session_state.show_letter = True
-                    st.rerun() # Refresh to show the letter
+                    st.rerun() 
 
             if st.session_state.show_letter:
                 st.snow() 
-                
-                # --- THE LOVE LETTER (Edit your text here!) ---
                 letter_html = """
                 <div style="background-color: #fdf6e3; padding: 40px; border-radius: 10px; box-shadow: 2px 5px 15px rgba(0,0,0,0.15); border: 2px solid #e0d0b8; margin-top: 30px;">
                     <h2 style="color: #8E242C; text-align: center; font-family: 'Comic Sans MS', cursive;">💌 My Letter to You 💌</h2>
@@ -266,8 +229,6 @@ if password == "101125":
 My Dearest,
 
 [WRITE YOUR LOVE LETTER HERE!] 
-
-You can type as many paragraphs as you want. Just keep it between the <p> and </p> tags in the code, and it will magically format itself to look like beautiful handwriting on a scroll.
 
 Happy 6 Months! Here is to many more.
 
@@ -282,7 +243,6 @@ Love,
         # === TAB 2: THE FULL GALLERY GRID ===
         with tab_gallery:
             st.markdown("<h2>📸 All Our Memories 📸</h2>", unsafe_allow_html=True)
-            st.write("Take your time looking through all of them here.")
             
             col1, col2, col3 = st.columns(3)
             with col1:
@@ -305,5 +265,28 @@ Love,
                 st.image("selfie 2.jpeg", use_container_width=True)
                 st.image("selfie 5.jpeg", use_container_width=True)
 
+        # === TAB 3: THE DIGITAL MIXTAPE ===
+        with tab_music:
+            st.markdown("<h2>🎧 Our Digital Mixtape 🎧</h2>", unsafe_allow_html=True)
+            st.write("A collection of songs that instantly make me think of you.")
+            st.markdown("---")
+
+            # Song 1
+            st.markdown("### 1. The Vibe")
+            st.write("This song always reminds me of that one time we...")
+            # Paste your Spotify Embed iframe code here between the quotes!
+            spotify_1 = """<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/4cOdK2wGLETKBW3PvgPWqT?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"""
+            components.html(spotify_1, height=160)
+
+            # Song 2
+            st.markdown("### 2. The Late Night Drives")
+            st.write("If we had a movie soundtrack, this would be the main theme.")
+            # Paste your Spotify Embed iframe code here between the quotes!
+            spotify_2 = """<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/3USxtqRwSYz57Ewm6wJQZv?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"""
+            components.html(spotify_2, height=160)
+
+            # Note: You can easily copy and paste the block above to add Song 3, Song 4, etc!
+
 elif password != "":
     st.error("Incorrect password! Think harder! 😂")
+    
