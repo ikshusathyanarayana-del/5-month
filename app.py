@@ -230,7 +230,7 @@ My Dearest,
 
 [WRITE YOUR LOVE LETTER HERE!] 
 
-Happy 6 Months! Here is to many more.
+Happy 6 Months babe! Here is to many more.
 
 Love,
 [Your Name]
@@ -238,7 +238,7 @@ Love,
                 </div>
                 """
                 st.markdown(letter_html, unsafe_allow_html=True)
-                st.success("WE DID IT! Can't wait for another 6 months of adventures!")
+                st.success("once again happy 6 months babe, I love you so much!")
         
         # === TAB 2: THE FULL GALLERY GRID ===
         with tab_gallery:
