@@ -272,21 +272,42 @@ Love,
             st.markdown("---")
 
             # Song 1
-            st.markdown("### 1. The Vibe")
-            st.write("This song always reminds me of that one time we...")
+            st.markdown("### 1. Hold My Girl")
+            st.write("it speaks for it self...")
             # Paste your Spotify Embed iframe code here between the quotes!
-            spotify_1 = """<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/4cOdK2wGLETKBW3PvgPWqT?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"""
+            spotify_1 = """<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/42bbDWZ8WmXTH7PkYAlGLu?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"""
             components.html(spotify_1, height=160)
 
             # Song 2
-            st.markdown("### 2. The Late Night Drives")
-            st.write("If we had a movie soundtrack, this would be the main theme.")
+            st.markdown("### 2. I'm with You")
+            st.write("lowkey hits different on a late night drive")
             # Paste your Spotify Embed iframe code here between the quotes!
-            spotify_2 = """<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/3USxtqRwSYz57Ewm6wJQZv?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"""
+            spotify_2 = """<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6Qwuw0eOeszVlewLpu24gR?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"""
             components.html(spotify_2, height=160)
 
+             # Song 3
+            st.markdown("### 3. Wondering Why")
+            st.write("yea this is the OG of all songs that remind me of you")
+            # Paste your Spotify Embed iframe code here between the quotes!
+            spotify_2 = """<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/1HbzxLqpNVPdiBXvpC7Ovb?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"""
+            components.html(spotify_2, height=160)
+
+             # Song 4
+            st.markdown("### 4. Acoustic")
+            st.write("<3")
+            # Paste your Spotify Embed iframe code here between the quotes!
+            spotify_2 = """<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/1kJygfS4eoVziBBI93MSYp?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"""
+            components.html(spotify_2, height=160)
+
+             # Song 5
+            st.markdown("### 5. Thirsty")
+            st.write("need i say about this one haha")
+            # Paste your Spotify Embed iframe code here between the quotes!
+            spotify_2 = """<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/4uxeoxILE14NrTAIV0Q3g9?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"""
+            components.html(spotify_2, height=160)
+            
             # Note: You can easily copy and paste the block above to add Song 3, Song 4, etc!
 
 elif password != "":
-    st.error("Incorrect password! Think harder! 😂")
+    st.error("Incorrect password! Think harder, You got this babe 😂")
     
