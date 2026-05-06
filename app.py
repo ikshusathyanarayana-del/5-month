@@ -201,7 +201,7 @@ if password == "101125":
                 st.markdown("---")
                 st.markdown("<h2>Right Now 💖</h2>", unsafe_allow_html=True)
                 st.write("Half a year down, and I'm looking forward to everything coming next.")
-                st.image("us.jpeg", caption="Us.", use_container_width=True)
+                st.image("us .jpeg", caption="Us.", use_container_width=True)
 
                 st.markdown("---")
                 st.markdown("<h2>🎬 Memory Reel 🎬</h2>", unsafe_allow_html=True)
