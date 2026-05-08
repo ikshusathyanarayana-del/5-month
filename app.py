@@ -264,6 +264,7 @@ your stinky boi
                 st.image("selfie 1.jpeg", use_container_width=True)
                 st.image("selfie 4.jpeg", use_container_width=True)
                 st.image("her smile.jpeg", use_container_width=True)
+                st.image("midvalley 1.jpeg", use_container_width=True)
             with col3:
                 st.image("discord 3.jpeg", use_container_width=True)
                 st.image("her smile 2.jpeg", use_container_width=True)
@@ -271,7 +272,7 @@ your stinky boi
                 st.image("selfie 2.jpeg", use_container_width=True)
                 st.image("selfie 5.jpeg", use_container_width=True)
                 st.image("midvalley 2.jpeg", use_container_width=True)
-                st.image("midvalley 1.jpeg", use_container_width=True)
+               
 
         # === TAB 3: THE DIGITAL MIXTAPE ===
         with tab_music:
