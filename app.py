@@ -179,7 +179,7 @@ if password == "101125":
 
             st.markdown("---")
             st.markdown("<h2>🎬 Memory Reel 🎬</h2>", unsafe_allow_html=True)
-            st.write("A quick look back at all the smiles...")
+            st.write("A look back at all our smiles...")
             
             github_images = [
                 "video call SS 1.jpeg", "her 1.jpeg", "her smile 3.jpeg", "selfie 3.jpeg", "she kiss me.jpeg",
@@ -213,7 +213,7 @@ if password == "101125":
                 st.write("(Upload your images to GitHub to see the slideshow!)")
 
             st.markdown("---")
-            st.write("Ready for the grand finale?")
+            st.write("this letter is for you")
             
             if not st.session_state.show_letter:
                 if st.button("Click for Your Surprise!", key="final_btn"):
@@ -224,7 +224,7 @@ if password == "101125":
                 st.snow() 
                 letter_html = """
                 <div style="background-color: #fdf6e3; padding: 40px; border-radius: 10px; box-shadow: 2px 5px 15px rgba(0,0,0,0.15); border: 2px solid #e0d0b8; margin-top: 30px;">
-                    <h2 style="color: #8E242C; text-align: center; font-family: 'Comic Sans MS', cursive;">💌 My Letter to You 💌</h2>
+                    <h2 style="color: #8E242C; text-align: center; font-family: 'Comic Sans MS', cursive;">💌 A special message to my beautiful girlfriend 💌</h2>
                     <p style="font-size: 1.5rem; color: #5D4037; line-height: 1.8; font-family: 'Comic Sans MS', cursive; white-space: pre-wrap;">
 My Dearest,
 
@@ -244,7 +244,7 @@ your stinky boi
                 </div>
                 """
                 st.markdown(letter_html, unsafe_allow_html=True)
-                st.success("once again happy 6 months babe, I love you so much!")
+                st.success("I love you so much!")
         
         # === TAB 2: THE FULL GALLERY GRID ===
         with tab_gallery:
