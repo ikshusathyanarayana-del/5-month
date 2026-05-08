@@ -184,7 +184,7 @@ if password == "101125":
             github_images = [
                 "video call SS 1.jpeg", "her 1.jpeg", "her smile 3.jpeg", "selfie 3.jpeg", "she kiss me.jpeg",
                 "discord 2.jpeg", "discord 4.jpeg", "her eyes 1.jpeg", "selfie 1.jpeg", "selfie 4.jpeg", "her smile.jpeg",
-                "discord 3.jpeg", "her smile 2.jpeg", "me kiss her.jpeg", "selfie 2.jpeg", "selfie 5.jpeg"
+                "discord 3.jpeg", "her smile 2.jpeg", "me kiss her.jpeg", "selfie 2.jpeg", "selfie 5.jpeg", "midvalley 2.jpeg", "midvalley 1.jpeg"
             ]
             
             b64_imgs = [f"data:image/jpeg;base64,{get_base64_image(img)}" for img in github_images if get_base64_image(img)]
@@ -270,6 +270,8 @@ your stinky boi
                 st.image("me kiss her.jpeg", use_container_width=True)
                 st.image("selfie 2.jpeg", use_container_width=True)
                 st.image("selfie 5.jpeg", use_container_width=True)
+                st.image("midvalley 2.jpeg", use_container_width=True)
+                st.image("midvalley 1.jpeg", use_container_width=True)
 
         # === TAB 3: THE DIGITAL MIXTAPE ===
         with tab_music:
