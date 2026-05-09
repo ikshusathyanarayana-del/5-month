@@ -311,6 +311,13 @@ your stinky boi
             spotify_5 = """<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/4uxeoxILE14NrTAIV0Q3g9?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"""
             components.html(spotify_5, height=350)
 
+            # Song 6
+            st.markdown("### 6. Sariyaagi")
+            st.write("its a kannada song but when u translate, its beautiful")
+            spotify_5 = """<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/27rGRAvs3SEJ70ke4DRJtx?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"""
+            components.html(spotify_5, height=350)
+
+            
         # === TAB 4: THE FINAL SURPRISE ===
         with tab_recipe:
             if not st.session_state.show_recipe:
