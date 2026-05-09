@@ -168,11 +168,11 @@ if password == "101125":
             st.image("starting days.jpeg", caption="Where it all began ❤️", use_container_width=True) 
             
             st.markdown("---")
-            st.markdown("<h2>A Secret Memory 🤫</h2>", unsafe_allow_html=True)
+            st.markdown("<h2> Memories I Cherish 🥹</h2>", unsafe_allow_html=True)
             
             with st.expander("Click to reveal..."):
                 st.write("Our late-night Discord calls were the best part of my day.")
-                st.image("discord 1.jpeg", caption="😂", use_container_width=True) 
+                st.image("discord 1.jpeg", caption="😘", use_container_width=True) 
                 
             st.markdown("---")
             st.markdown("<h2>Right Now 💖</h2>", unsafe_allow_html=True)
