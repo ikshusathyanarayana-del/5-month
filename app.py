@@ -158,7 +158,7 @@ if password == "101125":
         st.markdown("---")
         
         # --- THE FOUR TABS (Tab 4 Renamed!) ---
-        tab_story, tab_gallery, tab_music, tab_recipe = st.tabs(["🕰️ Our Story", "📸 Full Gallery", "🎧 Our Mixtape", "🤫 One Last Yurprise"])
+        tab_story, tab_gallery, tab_music, tab_recipe = st.tabs(["🕰️ Our Story", "📸 Full Gallery", "🎧 Our Mixtape", "😉 One Last Surprise"])
         
         
         # === TAB 1: THE STORY & SLIDESHOW ===
