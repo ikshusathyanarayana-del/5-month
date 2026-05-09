@@ -14,6 +14,8 @@ if "app_unlocked" not in st.session_state:
     st.session_state.app_unlocked = False
 if "show_letter" not in st.session_state:
     st.session_state.show_letter = False
+if "show_recipe" not in st.session_state:
+    st.session_state.show_recipe = False
 
 # --- 2. THE DYNAMIC BACKGROUND & SCALING CSS ---
 st.markdown("""
@@ -30,7 +32,7 @@ st.markdown("""
     100% { background-position: 0% 50%; }
 }
 
-[data-testid="stMarkdownContainer"] p { font-size: 1.8rem !important; font-family: 'Comic Sans MS', cursive, sans-serif; color: #5D4037;}
+[data-testid="stMarkdownContainer"] p, [data-testid="stMarkdownContainer"] li { font-size: 1.4rem !important; font-family: 'Comic Sans MS', cursive, sans-serif; color: #5D4037;}
 h1 { font-size: 5rem !important; font-family: 'Comic Sans MS', cursive, sans-serif; color: #8E242C; text-align: center;}
 h2 { font-size: 3rem !important; color: #8E242C; text-align: center;}
 h3 { font-size: 2rem !important; color: #5D4037;}
@@ -155,8 +157,8 @@ if password == "101125":
         st.markdown("<h1>Our 6 Month Milestone!</h1>", unsafe_allow_html=True)
         st.markdown("---")
         
-        # --- THE THREE TABS ---
-        tab_story, tab_gallery, tab_music = st.tabs(["🕰️ Our Story", "📸 Full Gallery", "🎧 Our Mixtape"])
+        # --- THE FOUR TABS (Tab 4 Renamed!) ---
+        tab_story, tab_gallery, tab_music, tab_recipe = st.tabs(["🕰️ Our Story", "📸 Full Gallery", "🎧 Our Mixtape", "🤫 One Last Secret"])
         
         
         # === TAB 1: THE STORY & SLIDESHOW ===
@@ -271,7 +273,7 @@ your stinky boi
                 st.image("selfie 2.jpeg", use_container_width=True)
                 st.image("selfie 5.jpeg", use_container_width=True)
                 st.image("midvalley 2.jpeg", use_container_width=True)
-               
+                
 
         # === TAB 3: THE DIGITAL MIXTAPE ===
         with tab_music:
@@ -282,40 +284,104 @@ your stinky boi
             # Song 1
             st.markdown("### 1. Hold My Girl")
             st.write("it speaks for it self...")
-            # Paste your Spotify Embed iframe code here between the quotes!
             spotify_1 = """<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/42bbDWZ8WmXTH7PkYAlGLu?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"""
             components.html(spotify_1, height=350)
 
             # Song 2
             st.markdown("### 2. I'm with You")
             st.write("lowkey hits different on a late night drive")
-            # Paste your Spotify Embed iframe code here between the quotes!
             spotify_2 = """<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6Qwuw0eOeszVlewLpu24gR?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"""
             components.html(spotify_2, height=350)
 
              # Song 3
             st.markdown("### 3. Wondering Why")
             st.write("yea this is the OG of all songs that remind me of you")
-            # Paste your Spotify Embed iframe code here between the quotes!
-            spotify_2 = """<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/1HbzxLqpNVPdiBXvpC7Ovb?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"""
-            components.html(spotify_2, height=350)
+            spotify_3 = """<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/1HbzxLqpNVPdiBXvpC7Ovb?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"""
+            components.html(spotify_3, height=350)
 
              # Song 4
             st.markdown("### 4. Acoustic")
             st.write("<3")
-            # Paste your Spotify Embed iframe code here between the quotes!
-            spotify_2 = """<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/1kJygfS4eoVziBBI93MSYp?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"""
-            components.html(spotify_2, height=350)
+            spotify_4 = """<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/1kJygfS4eoVziBBI93MSYp?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"""
+            components.html(spotify_4, height=350)
 
              # Song 5
             st.markdown("### 5. Thirsty")
             st.write("need i say about this one haha")
-            # Paste your Spotify Embed iframe code here between the quotes!
-            spotify_2 = """<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/4uxeoxILE14NrTAIV0Q3g9?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"""
-            components.html(spotify_2, height=350)
-            
-            # Note: You can easily copy and paste the block above to add Song 3, Song 4, etc!
+            spotify_5 = """<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/4uxeoxILE14NrTAIV0Q3g9?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"""
+            components.html(spotify_5, height=350)
+
+        # === TAB 4: THE FINAL SURPRISE ===
+        with tab_recipe:
+            if not st.session_state.show_recipe:
+                st.markdown("<br><br>", unsafe_allow_html=True)
+                st.markdown("<h2>🤫 One Last Secret...</h2>", unsafe_allow_html=True)
+                st.markdown("<p style='text-align: center;'>You didn't think I'd forget the one thing you've been begging me for, did you?</p>", unsafe_allow_html=True)
+                
+                # Center the button nicely
+                col1, col2, col3 = st.columns([1, 2, 1])
+                with col2:
+                    if st.button("Reveal the Secret! 🍲", key="recipe_btn", use_container_width=True):
+                        st.session_state.show_recipe = True
+                        st.rerun()
+
+            if st.session_state.show_recipe:
+                st.balloons()
+                st.markdown("<h2>🍲 Mum's Special Pulao Recipe</h2>", unsafe_allow_html=True)
+                st.write("I know you've been asking for this for a while, so I had to sneak it in as a little extra surprise! Now we have a perfect excuse for a cooking date. 😉")
+                st.markdown("---")
+
+                # Using two columns to make it look like a nice cookbook!
+                col_ingredients, col_instructions = st.columns([1, 1.5], gap="large")
+                
+                with col_ingredients:
+                    st.markdown("""
+                    ### 🛒 Ingredients
+                    
+                    **🌿 For the Green Paste:**
+                    * Garlic *(7 to 8 cloves for 2 glasses of rice)*
+                    * Ginger *(1 inch)*
+                    * Green chilies *(4)*
+                    * Mint leaves *(a little)*
+                    * Coriander leaves *(a little)*
+                    
+                    **🍂 Whole Spices:**
+                    * Cinnamon, cloves, bay leaf, star anise, stone flower, cardamom, and shahi jeera (caraway seeds)
+                    
+                    **🧅 Main Ingredients:**
+                    * Oil
+                    * Onions *(2 small ones for 2 glasses of rice)*
+                    * Mixed vegetables
+                    * Rice *(2 glasses)*
+                    * Water *(4 glasses)*
+                    
+                    **🧂 Dry Powders & Flavorings:**
+                    * Coriander powder *(2 spoons)*
+                    * Garam masala *(a little)*
+                    * Turmeric powder *(a little)*
+                    * Salt to taste
+                    * Yogurt/Curd *(2 to 3 spoons)*
+                    * Lemon *(half)*
+                    * Kasuri methi *(dried fenugreek leaves)*
+                    """)
+
+                with col_instructions:
+                    st.markdown("""
+                    ### 👩‍🍳 Step-by-Step Instructions
+                    
+                    1. **Make the paste:** First, blend the garlic, ginger, green chilies, mint, and coriander leaves into a smooth paste. 
+                    2. **Temper the spices:** Heat oil in a pressure cooker. Add the whole spices and fry them in the oil to release their aroma.
+                    3. **Fry the onions:** Add finely chopped onions and fry them until they turn a reddish golden-brown.
+                    4. **Cook the paste:** Add the prepared green paste to the fried onions and fry well until the raw smell disappears and the oil separates.
+                    5. **Add dry spice powders:** Mix in about 2 spoons of coriander powder, a little garam masala, and a little turmeric.
+                    6. **Cook the vegetables:** Add your choice of vegetables and mix well. Add a little salt, mix again, and let it cook for 2 to 3 minutes.
+                    7. **Add yogurt and lemon:** Stir in 2 to 3 spoons of yogurt and the juice of half a lemon, then mix everything thoroughly.
+                    8. **Add kasuri methi:** Sprinkle in a little kasuri methi and let the mixture fry a bit more.
+                    9. **Add water:** Pour in the water (1:2 ratio). For 2 glasses of rice, add 4 glasses of water. Mix well and check the salt. Add more if needed.
+                    10. **Add rice:** Wait for the water to start boiling, then add the rice and mix well.
+                    11. **Pressure cook:** Once it comes to a rolling boil again, do a final taste test for salt, close the cooker lid, and put the whistle (weight) on. Cook it for exactly 2 whistles.
+                    12. **Rest and serve:** After 2 whistles, turn off the heat and let it rest. Once the cooker cools down completely, open the lid, and your pulao is ready!
+                    """)
 
 elif password != "":
-    st.error("Incorrect password! Think harder, You got this babe 😂")
-    
+    st.error("Incorrect password! Think harder, You got this babe")
