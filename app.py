@@ -158,7 +158,7 @@ if password == "101125":
         st.markdown("---")
         
         # --- THE FOUR TABS (Tab 4 Renamed!) ---
-        tab_story, tab_gallery, tab_music, tab_recipe = st.tabs(["🕰️ Our Story", "📸 Full Gallery", "🎧 Our Mixtape", "🤫 One Last Secret"])
+        tab_story, tab_gallery, tab_music, tab_recipe = st.tabs(["🕰️ Our Story", "📸 Full Gallery", "🎧 Our Mixtape", "🤫 One Last Yurprise"])
         
         
         # === TAB 1: THE STORY & SLIDESHOW ===
@@ -315,7 +315,7 @@ your stinky boi
         with tab_recipe:
             if not st.session_state.show_recipe:
                 st.markdown("<br><br>", unsafe_allow_html=True)
-                st.markdown("<h2>🤫 One Last Suprise...</h2>", unsafe_allow_html=True)
+                st.markdown("<h2>🤫 One Last Surprise...</h2>", unsafe_allow_html=True)
                 st.markdown("<p style='text-align: center;'>You didn't think I'd forget the one thing you've been asking me for, did you?</p>", unsafe_allow_html=True)
                 
                 # Center the button nicely
@@ -328,7 +328,7 @@ your stinky boi
             if st.session_state.show_recipe:
                 st.balloons()
                 st.markdown("<h2>🍲 Mum's Special Pulao Recipe</h2>", unsafe_allow_html=True)
-                st.write("I know you've been asking for this for a while, so I had to sneak it in as a little extra surprise! Now we have a perfect excuse for a cooking date. 😉")
+                st.write("I know you've been asking for this for a while, so I had to sneak it in as a little extra surprise!😉")
                 st.markdown("---")
 
                 # Using two columns to make it look like a nice cookbook!
