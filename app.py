@@ -235,7 +235,7 @@ ok back to the point. You genuinely make me a better man. I love running my thou
 And once again HAPPY SIX MONTHS BABY. I LOVE YOU SOO SOO MUCHH.
 
 
-Happy 6 Months babe! Here is to many more.
+Here is to many more.
 
 Love,
 your stinky boi
