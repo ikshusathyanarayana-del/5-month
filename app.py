@@ -315,8 +315,8 @@ your stinky boi
         with tab_recipe:
             if not st.session_state.show_recipe:
                 st.markdown("<br><br>", unsafe_allow_html=True)
-                st.markdown("<h2>🤫 One Last Secret...</h2>", unsafe_allow_html=True)
-                st.markdown("<p style='text-align: center;'>You didn't think I'd forget the one thing you've been begging me for, did you?</p>", unsafe_allow_html=True)
+                st.markdown("<h2>🤫 One Last Suprise...</h2>", unsafe_allow_html=True)
+                st.markdown("<p style='text-align: center;'>You didn't think I'd forget the one thing you've been asking me for, did you?</p>", unsafe_allow_html=True)
                 
                 # Center the button nicely
                 col1, col2, col3 = st.columns([1, 2, 1])
