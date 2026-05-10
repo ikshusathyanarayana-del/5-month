@@ -317,7 +317,26 @@ your stinky boi
             spotify_5 = """<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/27rGRAvs3SEJ70ke4DRJtx?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"""
             components.html(spotify_5, height=350)
 
-            
+            # Song 7
+            st.markdown("### 7. Immun Konjam Neram")
+            st.write("😘")
+            spotify_5 = """<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/5KJSI1MjQeXEBHBYMjgP41?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"""
+            components.html(spotify_5, height=350)
+
+            # Song 8
+            st.markdown("### 8. High on Love")
+            st.write("🥰")
+            spotify_5 = """<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/0zDmCKN7OlRmNmeiiJAyOR?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"""
+            components.html(spotify_5, height=350)
+
+             # Song 9
+            st.markdown("### 9. Sirikkadhey")
+            st.write("🫂")
+            spotify_5 = """<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/4NQBqInyE7zvjIiP4j1dmy?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"""
+            components.html(spotify_5, height=350)
+
+
+
         # === TAB 4: THE FINAL SURPRISE ===
         with tab_recipe:
             if not st.session_state.show_recipe:
